@@ -35,12 +35,15 @@ const updateTodosById = (req, res) => __awaiter(void 0, void 0, void 0, function
     const { id } = req.params;
     const { title, description, completed } = req.body;
     const filter = { _id: new mongodb_2.ObjectId(id) };
+    const updateFields = {};
+    if (title !== undefined)
+        updateFields.title = title;
+    if (description !== undefined)
+        updateFields.description = description;
+    if (completed !== undefined)
+        updateFields.completed = completed;
     const updateDoc = {
-        $set: {
-            title,
-            description,
-            completed,
-        },
+        $set: updateFields,
     };
     const result = yield todosCollection.updateOne(filter, updateDoc);
     res.send(result);

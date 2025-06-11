@@ -26,12 +26,12 @@ export const updateTodosById = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { title, description, completed } = req.body;
   const filter = { _id: new ObjectId(id) };
+  const updateFields: any = {};
+  if (title !== undefined) updateFields.title = title;
+  if (description !== undefined) updateFields.description = description;
+  if (completed !== undefined) updateFields.completed = completed;
   const updateDoc = {
-    $set: {
-      title,
-      description,
-      completed,
-    },
+    $set: updateFields,
   };
   const result = await todosCollection.updateOne(filter, updateDoc);
   res.send(result);
