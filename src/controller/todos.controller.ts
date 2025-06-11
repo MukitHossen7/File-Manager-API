@@ -10,6 +10,12 @@ export const getAllTodos = async (req: Request, res: Response) => {
   res.send(result);
 };
 
+export const getTodosById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await todosCollection.findOne({ _id: new ObjectId(id) });
+  res.send(result);
+};
+
 export const postTodos = async (req: Request, res: Response) => {
   const body = req.body;
   const result = await todosCollection.insertOne(body);

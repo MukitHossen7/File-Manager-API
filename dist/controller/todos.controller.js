@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateTodosById = exports.deleteTodosById = exports.postTodos = exports.getAllTodos = void 0;
+exports.updateTodosById = exports.deleteTodosById = exports.postTodos = exports.getTodosById = exports.getAllTodos = void 0;
 const mongodb_1 = require("../db/mongodb");
 const mongodb_2 = require("mongodb");
 //collection
@@ -19,6 +19,12 @@ const getAllTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     res.send(result);
 });
 exports.getAllTodos = getAllTodos;
+const getTodosById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const result = yield todosCollection.findOne({ _id: new mongodb_2.ObjectId(id) });
+    res.send(result);
+});
+exports.getTodosById = getTodosById;
 const postTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     const result = yield todosCollection.insertOne(body);

@@ -10,5 +10,6 @@ const todos_controller_1 = require("../controller/todos.controller");
 exports.todosRouter = express_1.default.Router();
 exports.todosRouter.post("/", todos_controller_1.postTodos);
 exports.todosRouter.get("/", todos_controller_1.getAllTodos);
+exports.todosRouter.get("/:id", todos_controller_1.getTodosById);
 exports.todosRouter.delete("/:id", todos_controller_1.deleteTodosById);
 exports.todosRouter.patch("/:id", todos_controller_1.updateTodosById);
