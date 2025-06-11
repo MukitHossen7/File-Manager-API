@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteTodosById = exports.postTodos = exports.getAllTodos = void 0;
+exports.updateTodosById = exports.deleteTodosById = exports.postTodos = exports.getAllTodos = void 0;
 const mongodb_1 = require("../db/mongodb");
 const mongodb_2 = require("mongodb");
 //collection
@@ -31,3 +31,18 @@ const deleteTodosById = (req, res) => __awaiter(void 0, void 0, void 0, function
     res.send(result);
 });
 exports.deleteTodosById = deleteTodosById;
+const updateTodosById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { title, description, completed } = req.body;
+    const filter = { _id: new mongodb_2.ObjectId(id) };
+    const updateDoc = {
+        $set: {
+            title,
+            description,
+            completed,
+        },
+    };
+    const result = yield todosCollection.updateOne(filter, updateDoc);
+    res.send(result);
+});
+exports.updateTodosById = updateTodosById;

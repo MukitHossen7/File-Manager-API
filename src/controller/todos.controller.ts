@@ -21,3 +21,18 @@ export const deleteTodosById = async (req: Request, res: Response) => {
   const result = await todosCollection.deleteOne({ _id: new ObjectId(id) });
   res.send(result);
 };
+
+export const updateTodosById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { title, description, completed } = req.body;
+  const filter = { _id: new ObjectId(id) };
+  const updateDoc = {
+    $set: {
+      title,
+      description,
+      completed,
+    },
+  };
+  const result = await todosCollection.updateOne(filter, updateDoc);
+  res.send(result);
+};
