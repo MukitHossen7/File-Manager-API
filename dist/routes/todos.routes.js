@@ -9,4 +9,5 @@ const todos_controller_1 = require("../controller/todos.controller");
 //Single routing
 exports.todosRouter = express_1.default.Router();
 exports.todosRouter.post("/", todos_controller_1.postTodos);
-exports.todosRouter.get("/GET", todos_controller_1.getAllTodos);
+exports.todosRouter.get("/", todos_controller_1.getAllTodos);
+exports.todosRouter.delete("/:id", todos_controller_1.deleteTodosById);

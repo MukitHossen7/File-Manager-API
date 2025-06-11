@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { client } from "../db/mongodb";
+import { ObjectId } from "mongodb";
 
 //collection
 const todosCollection = client.db("CRUD_DB").collection("todos");
@@ -12,5 +13,11 @@ export const getAllTodos = async (req: Request, res: Response) => {
 export const postTodos = async (req: Request, res: Response) => {
   const body = req.body;
   const result = await todosCollection.insertOne(body);
+  res.send(result);
+};
+
+export const deleteTodosById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await todosCollection.deleteOne({ _id: new ObjectId(id) });
   res.send(result);
 };

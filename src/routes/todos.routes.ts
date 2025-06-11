@@ -1,8 +1,13 @@
 import express from "express";
-import { getAllTodos, postTodos } from "../controller/todos.controller";
+import {
+  deleteTodosById,
+  getAllTodos,
+  postTodos,
+} from "../controller/todos.controller";
 
 //Single routing
 export const todosRouter = express.Router();
 
 todosRouter.post("/", postTodos);
-todosRouter.get("/GET", getAllTodos);
+todosRouter.get("/", getAllTodos);
+todosRouter.delete("/:id", deleteTodosById);

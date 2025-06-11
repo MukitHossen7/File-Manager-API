@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postTodos = exports.getAllTodos = void 0;
+exports.deleteTodosById = exports.postTodos = exports.getAllTodos = void 0;
 const mongodb_1 = require("../db/mongodb");
+const mongodb_2 = require("mongodb");
 //collection
 const todosCollection = mongodb_1.client.db("CRUD_DB").collection("todos");
 const getAllTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -24,3 +25,9 @@ const postTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.send(result);
 });
 exports.postTodos = postTodos;
+const deleteTodosById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const result = yield todosCollection.deleteOne({ _id: new mongodb_2.ObjectId(id) });
+    res.send(result);
+});
+exports.deleteTodosById = deleteTodosById;
